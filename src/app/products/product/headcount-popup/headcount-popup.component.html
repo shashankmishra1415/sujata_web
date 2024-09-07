@@ -1,0 +1,69 @@
+<div class="modal" style="display:block" id="headcount_modal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered1 modal-simple modal-add-new-cc">
+        <div class="modal-content p-0 p-md-0">
+            <div class="modal-body dashboard-cards rounded">
+                <button type="button" class="btn-close" (click)="dismiss_click($event)" aria-label="Close"></button>
+                <div class="text-left mb-4">
+                    <h3 class="mb-0">Headcount</h3>
+                </div>
+                <form>
+                    <div class="row ">
+                        <div class="col-md-12">
+                            <div class="dashboard-cards card-datatable table-responsive ">
+                                <table class=" table table-bordered" id="category_1">
+                                    <colgroup>
+                                        <col>
+                                        <col class="colum1">
+                                        <col class="colum2">
+                                        <col class="colum2">
+                                        <col class="colum2">
+                                        <col class="colum2">
+                                    </colgroup>
+                                    <thead class="border-top">
+                                        <tr>
+                                            <th>Sub category</th>
+                                            <th *ngFor="let i of years">
+                                                <label for="" class="form-label">Year {{i}}</label>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <ng-container *ngFor="let cat of getUniqueCategories">
+                                            <tr>
+                                                <td class="text-dark fw-bold">{{cat.name}}</td>
+                                                <td colspan="5"></td>
+                                            </tr>
+                                            <tr *ngFor="let subCat of getSubCategoriesByCategoryId(cat.id)">
+                                                <td>{{subCat.name}}</td>
+                                                <td *ngFor="let year of years; index as i">
+                                                    <input type="text" class="form-control"
+                                                          name="datavalue{{i}}"
+                                                          (change)="item_changed($event, getHeadCountByCategory_SubCategtory_year(year, cat.id, subCat.id))"
+                                                          [value]="getHeadCountByCategory_SubCategtory_year(year, cat.id, subCat.id).count"
+                                                    />
+                                                </td>
+                                            </tr>
+                                            <tr style="font-weight: bold;">
+                                                <td>Total</td>
+                                                <ng-container *ngFor="let year of years">
+                                                  <td>{{calculateTotalEmployeeCountByYearAndCategory(year, cat.id)}}</td>
+                                                </ng-container>
+                                            </tr>
+                                        </ng-container>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-12 text-center mt-4">
+                        <button type="button" class="btn btn-primary me-sm-3 me-1" (click)="save_click($event)">Save</button>
+                        <button type="button" class="btn btn-label-secondary" (click)="cancel_click($event)">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+@import '../../../../assets/vendor/libs/dropzone/dropzone.css';
+
+
+button {
+}
+
+  button .fa-spin {
+      display: none;
+  }
+
+  button.inProgress {
+      pointer-events: none;
+  }
+
+    button.inProgress .fa-spin {
+      display: unset;
+    }

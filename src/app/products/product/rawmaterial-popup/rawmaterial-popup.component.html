@@ -1,0 +1,38 @@
+<div class="modal" style="display: block" tabindex="-1">
+    <div class="modal-dialog modal-md modal-dialog-centered1 modal-simple modal-add-new-cc">
+      <div class="modal-content p-0 p-md-0">
+        <div class="modal-body dashboard-cards rounded">
+          <button type="button" class="btn-close" (click)="dismiss_click($event)"></button>
+          <div class="text-left mb-4">
+            <h3 class="mb-2">Add Components</h3>
+          </div>
+          <form>
+            <div class="card-datatable table-responsive add-components-table">
+              <table class="datatables-category-list table" id="Components">
+                <thead>
+                  <tr class="t-1">
+                    <th><input type="checkbox" name="asldfjlksadjf" class="form-check-input head-checkbox" [(ngModel)]="chkSelectAll"></th>
+                    <th><strong>Name</strong></th>
+                    <th><strong>Category</strong></th>
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                  <tr *ngFor="let ac of components; let i as index">
+                    <td><input type="checkbox" name="chkk{{i}}" class="form-check-input subs-checkbox" [(ngModel)]="ac.isSelected"></td>
+                    <td>{{ac.name}}</td>
+                    <td>{{getCategoryById(ac.categoryId).name}}</td>
+                  </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <div class="col-12 text-center mt-4">
+              <button type="button" class="btn btn-primary me-sm-3 me-1" (click)="add_click($event)">Add</button>
+              <button type="reset" class="btn btn-label-secondary btn-reset" (click)="cancel_click($event)">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,130 @@
+<div id="balance-modern" class="content">
+  <!-- <div class="content-header mb-3">
+    <h6 class="mb-0">Balance Sheet</h6>
+    <small>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</small>
+  </div> -->
+  <div class="row g-4">
+
+    <div class="col-md-12">
+      <div class="card mt-2 p-3 dashboard-cards col-12">
+        <div class="card-datatable table-responsive pb-0">
+          <table class="table table-bordered mb-0" id="wage-salary">
+            <colgroup>
+              <col>
+              <col class="colum1">
+              <col class="colum2 dt-body-right">
+              <col class="colum1">
+              <col class="colum2">
+              <col class="colum1">
+            </colgroup>
+            <thead>
+              <tr class="t-1">
+                <th><strong>Liabilites</strong></th>
+                <th class="text-center"><strong>Year 1</strong></th>
+                <th class="text-center"><strong>Year 2</strong></th>
+                <th class="text-center"><strong>Year 3</strong></th>
+                <th class="text-center"><strong>Year 4</strong></th>
+                <th class="text-center"><strong>Year 5</strong></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Capital</td>
+                <td *ngFor="let val of BalanceSheetData.liabilities.capital"><span [ngClass]="val < 0 ? 'text-danger' : ''">{{val | currency:'INR': ''}}</span></td>
+              </tr>
+
+              <tr>
+                <td>Reserve</td>
+                <td *ngFor="let val of BalanceSheetData.liabilities.reserve"><span [ngClass]="val < 0 ? 'text-danger' : ''">{{val | currency:'INR': ''}}</span></td>
+              </tr>
+              <tr>
+                <td>Creditors</td>
+                <td *ngFor="let val of BalanceSheetData.liabilities.creditor"><span [ngClass]="val < 0 ? 'text-danger' : ''">{{val | currency:'INR': ''}}</span></td>
+              </tr>
+
+              <tr class="table-primary" style="font-weight: bold;">
+                <td style="height: 40px;"> Total</td>
+                <td *ngFor="let val of BalanceSheetData.liabilities.total"><span [ngClass]="val < 0 ? 'text-danger' : ''">{{val | currency:'INR': ''}}</span></td>
+              </tr>
+
+              <tr class="t-1">
+                <th>Assets</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+              <tr>
+                <td>Fixed Assets <small>(As per books)</small></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+
+              <tr>
+                <td>Machinery</td>
+                <td *ngFor="let val of BalanceSheetData.assets.machinery"><span [ngClass]="val < 0 ? 'text-danger' : ''">{{val | currency:'INR': ''}}</span></td>
+              </tr>
+
+              <tr>
+                <td>Depreciation</td>
+                <td *ngFor="let val of BalanceSheetData.assets.depreciation"><span [ngClass]="val < 0 ? 'text-danger' : ''">{{val | currency:'INR': ''}}</span></td>
+              </tr>
+
+              <tr>
+                <td>Investment <small>(Surplus)</small></td>
+                <td *ngFor="let val of BalanceSheetData.assets.investments"><span [ngClass]="val < 0 ? 'text-danger' : ''">{{val | currency:'INR': ''}}</span></td>
+              </tr>
+
+              <tr>
+                <td>Stock in Hand</td>
+                <td *ngFor="let val of BalanceSheetData.assets.stockInHand"><span [ngClass]="val < 0 ? 'text-danger' : ''">{{val | currency:'INR': ''}}</span></td>
+              </tr>
+
+              <tr>
+                <td>Bank & Cash</td>
+                <td *ngFor="let val of BalanceSheetData.assets.bankAndCash; index as i"><input type="text" class="form-control" name="bank_cash{{i}}" [(ngModel)]="BalanceSheetData.assets.bankAndCash[i]"></td>
+              </tr>
+
+              <tr class="table-primary" style="font-weight: bold;">
+                <td style="height: 40px;"> Total</td>
+                <td *ngFor="let val of BalanceSheetData.assets.total"><span [ngClass]="val < 0 ? 'text-danger' : ''">{{val | currency:'INR': ''}}</span></td>
+              </tr>
+
+              <tr>
+                <td></td>
+                <td *ngFor="let val of BalanceSheetData.assets_Liabilities_Difference"><span [ngClass]="val < 0 ? 'text-danger' : ''">{{val | currency:'INR': ''}}</span></td>
+              </tr>
+
+              <tr>
+                <td>Net Profit</td>
+                <td *ngFor="let val of BalanceSheetData.netProfit"><span [ngClass]="val < 0 ? 'text-danger' : ''">{{val | currency:'INR': ''}}</span></td>
+              </tr>
+
+              <tr>
+                <td>Cash Profit</td>
+                <td *ngFor="let val of BalanceSheetData.cashProfit"><span [ngClass]="val < 0 ? 'text-danger' : ''">{{val | currency:'INR': ''}}</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="row g-3 mt-3">
+    <div class="col-12 d-flex justify-content-between">
+      <button class="btn btn-label-secondary btn-prev" (click)="prev_click()">
+        <i class="ti ti-arrow-left me-sm-1"></i>
+        <span class="align-middle d-sm-inline-block d-none">Previous</span>
+      </button>
+      <button class="btn btn-primary btn-next" (click)="next_click()">
+        <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+        <i class="ti ti-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</div>

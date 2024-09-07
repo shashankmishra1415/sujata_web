@@ -1,0 +1,81 @@
+<div id="headcount-modern" class="content">
+  <div class="content-header mb-3 d-flex justify-content-between">
+    <!-- <h6 class="mb-0">Others</h6> -->
+    <small>
+      <i class="ti ti-info-circle text-primary"></i> Please enter the number of people (in
+      different categories), who will be working on this product. Click any cell to edit the
+      value
+    </small>
+    <a (click)="editHeadCount_Click()" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+      ><i class="ti ti-edit me-0 me-sm-1 ti-xs"></i> Edit</a>
+  </div>
+  <div class="row g-4">
+    <div class="col-md-12">
+      <div class=" card-datatable table-responsive p-2">
+        <table class=" table no-bordered text-center headcount_category">
+          <colgroup>
+            <col class="table_yr">
+            <col class="table_gape">
+            <col class="table_year1">
+            <col class="table_gape">
+            <col class="table_year1">
+            <col class="table_gape">
+            <col class="table_year1">
+            <col class="table_gape">
+            <col class="table_year1">
+            <col class="table_gape">
+            <col class="table_year1">
+          </colgroup>
+          <thead class="">
+            <tr>
+              <th width="340px" class="category_name t-2">Category</th>
+              <th class="table_gape"></th>
+              <ng-container *ngFor="let year of years">
+                <td class="t-2">
+                  Year {{year}}
+                  <h4 class="mb-0 text-primary">{{calculateTotalAmountByYear(year) | currency: 'INR'}}</h4>
+                  <small class="price-yearly price-yearly-toggle ">
+                    <i class="ti ti-user  small"></i> {{calculateTotalEmployeeCountByYear(year)}} {{year!== 1 ?'| ' + calculateTotalEmployeeIncrementPercentByYear(year) : ''}}
+                  </small>
+                </td>
+                <td class="table_gape"></td>
+              </ng-container>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let cat of getUniqueCategories()">
+              <tr class="fs-5 fw-bold">
+                <td class="category_name text-dark fs-6">{{cat.name}}</td>
+                <ng-container  *ngFor="let year of years">
+                  <td class="table_gape"></td>
+                  <td>{{calculateTotalEmployeeCountByYearAndCategory(year, cat.id)}}</td>
+                </ng-container>
+                
+              </tr>
+              <tr *ngFor="let subCat of getSubCategoriesByCategoryId(cat.id)">
+                <td class="category_name">{{subCat.name}}</td>
+                <td class="table_gape"></td>
+                <ng-container *ngFor="let year of years">
+                  <td class="form-control">{{getHeadCountByCategory_SubCategtory_year(year, cat.id, subCat.id).count}}</td>
+                  <td class="table_gape"></td>
+                </ng-container>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row g-3 mt-3">
+    <div class="col-12 d-flex justify-content-between">
+      <button class="btn btn-label-secondary btn-prev" (click)="prev_click($event)">
+        <i class="ti ti-arrow-left me-sm-1"></i>
+        <span class="align-middle d-sm-inline-block d-none">Previous</span>
+      </button>
+      <button class="btn btn-primary btn-next" (click)="next_click()">
+        <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+        <i class="ti ti-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</div>

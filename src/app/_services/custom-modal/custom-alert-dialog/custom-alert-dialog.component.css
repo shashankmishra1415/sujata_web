@@ -1,0 +1,14 @@
+button {
+}
+
+  button .fa-spin {
+      display: none;
+  }
+
+  button.inProgress {
+      pointer-events: none;
+  }
+
+    button.inProgress .fa-spin {
+      display: unset;
+    }

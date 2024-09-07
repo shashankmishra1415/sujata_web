@@ -1,0 +1,42 @@
+<div class="container-fluid flex-grow-1 container-p-y">
+  <div class="row">
+    <div class="col-xl-12">
+      <h4 class="py-3 mb-0">
+        <span class="text-muted fw-light"><a role="button" routerLink="../">Configuration</a> /</span> Lookups
+      </h4>
+      <!-- <h4 class="mb-0 py-3">Configuration</h4> -->
+      <div class="nav-align-left mb-4">
+        <ul class="nav nav-pills me-3">
+          <li class="nav-item">
+            <button type="button" class="nav-link" routerLink="manufacturing" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
+              Manufacturing
+            </button>
+          </li>
+          <li class="nav-item">
+            <button type="button" class="nav-link" routerLink="expense" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
+              Expense Heads
+            </button>
+          </li>
+          <li class="nav-item">
+            <button type="button" class="nav-link" routerLink="employment-categories" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
+              Employment Categories     
+            </button>
+          </li>
+          <li class="nav-item">
+            <button type="button" class="nav-link" routerLink="employment-sub-categories" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
+              Employment Sub Categories     
+            </button>
+          </li>
+          <li class="nav-item">
+            <button type="button" class="nav-link" routerLink="wages-salaries" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
+              Wages & Salaries
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,142 @@
+<div id="financial-modern" class="content">
+  <!-- <div class="content-header mb-3">
+    <h6 class="mb-0">Financial Summary</h6>
+    <small>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</small>
+  </div> -->
+  <div class="row g-4">
+
+    <div class="col-md-12">
+      <div class="card mt-2 p-3 dashboard-cards col-12">
+        <div class="card-datatable table-responsive pb-0">
+          <table class="table table-bordered mb-0" id="financial_summary">
+            <colgroup>
+              <col>
+              <col class="colum1">
+              <col class="colum2">
+              <col class="colum1">
+              <col class="colum2">
+              <col class="colum1">
+            </colgroup>
+            <thead>
+              <tr class="t-1">
+                <th><strong>Years</strong></th>
+                <th></th>
+                <th class="text-center"><strong>1</strong></th>
+                <th class="text-center"><strong>2</strong></th>
+                <th class="text-center"><strong>3</strong></th>
+                <th class="text-center"><strong>4</strong></th>
+                <th class="text-center"><strong>5</strong></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong> Accrued Accounts</strong></td>
+                <td></td>
+                <td><a href="financial_monthly.html"><i class="fa-solid fa-circle-plus fs-6"></i></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Revenue from Operations</td>
+                <td>A</td>
+                <td>6,71,428.57</td>
+                <td>11,43,594.47</td>
+                <td>12,47,557.60</td>
+                <td>13,51,520.73</td>
+                <td>14,34,691.24</td>
+              </tr>
+              <tr>
+                <td>TVC</td>
+                <td>B</td>
+                <td>1,20,40,281.00</td>
+                <td>10,41,993.42</td>
+                <td>11,36,720.09</td>
+                <td>12,31,446.76</td>
+                <td>13,07,228.10</td>
+              </tr>
+
+
+
+              <tr>
+                <td><strong> Gross Profit</strong></td>
+                <td></td>
+                <td><span class="text-danger"> -1,13,68,852.42</span></td>
+                <td>1,01,601.04</td>
+                <td>1,10,837.50</td>
+                <td>1,20,073.96</td>
+                <td>1,27,463.13</td>
+              </tr>
+              <tr>
+                <td>Gross Profit Ratio</td>
+                <td>B</td>
+                <td><span class="text-danger">-16.93</span></td>
+                <td>0.08</td>
+                <td>0.08</td>
+                <td>0.08</td>
+                <td>0.08</td>
+              </tr>
+              <tr>
+                <td>Other Income</td>
+                <td>C</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>Fixed Cost</td>
+                <td>D</td>
+                <td>29,07,410.42</td>
+                <td>47,41,146.32</td>
+                <td>61,30,885.46</td>
+                <td>73,05,497.27</td>
+                <td>85,25,601.18</td>
+              </tr>
+              <tr>
+                <td>Contingency Factor</td>
+                <td></td>
+                <td>2,90,741.04</td>
+                <td>4,74,114.63</td>
+                <td>6,13,088.54</td>
+                <td>7,30,549.72</td>
+                <td>8,52,560.11</td>
+              </tr>
+              <tr class="table-primary" style="font-weight: bold;">
+                <td style="height: 40px;"><strong> Net Profit</strong></td>
+                <td></td>
+                <td><span class="text-danger"> -1,45,67,003.9</span></td>
+                <td><span class="text-danger"> -51,13,659.90</span></td>
+                <td><span class="text-danger"> -66,33,136.50</span></td>
+                <td><span class="text-danger"> -79,15,973.03</span></td>
+                <td><span class="text-danger"> -92,50,698.16</span></td>
+              </tr>
+              <tr>
+                <td>Net Profit Ratio</td>
+                <td></td>
+                <td><span class="text-danger"> -21.69</span></td>
+                <td><span class="text-danger"> -4.47</span></td>
+                <td><span class="text-danger"> -5.31</span></td>
+                <td><span class="text-danger"> -5.85</span></td>
+                <td><span class="text-danger"> -6.44</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="row g-3 mt-3">
+    <div class="col-12 d-flex justify-content-between">
+      <button class="btn btn-label-secondary btn-prev" (click)="prev_click()">
+        <i class="ti ti-arrow-left me-sm-1"></i>
+        <span class="align-middle d-sm-inline-block d-none">Previous</span>
+      </button>
+      <!-- <button class="btn btn-success btn-submit">Submit</button> -->
+      <a role="button" class="btn btn-success text-white" (click)="next_click()">Submit</a>
+    </div>
+  </div>
+</div>

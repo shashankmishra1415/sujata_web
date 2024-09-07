@@ -1,0 +1,46 @@
+<div class="container-fluid flex-grow-1 container-p-y">
+  <div class="d-flex align-items-center justify-content-between">
+    <h4 class="mb-0">Products</h4>
+    <a routerLink="../add" class="btn btn-sm add-new btn-primary"><span><i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Create New Product</span></span></a>
+  </div>
+  <div class="card mt-4">
+    <div class="card-header border-bottom">
+      <h5 class="card-title mb-3">Search Filter</h5>
+      <div class="row pb-2 gap-3 gap-md-0">
+        <div class="col-md-2">
+          <input type="text" class="form-control" placeholder="Product name" [(ngModel)]="Filter.Name" />
+        </div>
+        <div class="col-md-2">
+          <input type="date" class="form-control" placeholder="YYYY-MM-DD" [(ngModel)]="Filter.CreatedDate" />
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-outline-primary me-sm-3 me-1" (click)="filter_click()">Filter</button>
+          <button type="button" class="btn btn-label-secondary" (click)="clear_click()">Clear</button>
+        </div>
+      </div>
+    </div>
+    <div class="card-datatable table-responsive">
+      <p-table [value]="Products" [rows]="10" [paginator]="true"
+               [rowsPerPageOptions]="[5, 10, 20]"
+               >
+        <ng-template pTemplate="header">
+          <tr>
+            <th><strong>Product Name</strong></th>
+            <th><strong>Created Date</strong></th>
+            <th><strong>Action</strong></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+          <tr>
+            <td><a role="button" routerLink="../{{row.id}}/dashboard">{{ row.name }}</a></td>
+            <td>{{ row.createdDate | date:"dd MMM yyyy"}}</td>
+            <td>
+              <a role="button" title="Duplicate" (click)="item_clone_click(row)"><i class="ti ti-copy me-3"></i></a>
+              <a role="button" title="Delete" (click)="item_delete_click(row)"><i class="ti ti-trash"></i></a>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

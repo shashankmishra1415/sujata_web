@@ -1,0 +1,83 @@
+<div class="modal" style="display: block" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered1 modal-simple modal-add-new-cc">
+    <div class="modal-content p-0 p-md-0">
+      <div class="modal-body dashboard-cards rounded">
+        <button type="button" class="btn-close" (click)="dismiss_click($event)"></button>
+        <div class="text-left mb-4">
+          <h3 class="mb-2">Add Component</h3>
+        </div>
+        <form>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="mb-3">
+                <label class="form-label">Code</label>
+                <!--<input type="text" class="form-control" name="code" [ngClass]="!isSubmitClicked ? '': component.code.trim() === '' ? 'is-invalid': ''" [(ngModel)]="component.code" (change)="component.code = component.code.trim()" ngbAutofocus />-->
+                <ng-select [items]="hsnCodes"
+                           name="adfadsfasfd"
+                           class="form-control"
+                           bindLabel="hsnCode"
+                           bindValue="hsnCode"
+                           placeholder=""
+                           [(ngModel)]="component.code"
+                           [ngClass]="!isSubmitClicked ? '': component.code.trim() === '' ? 'is-invalid': ''"
+                           ngbAutofocus
+                           >
+                  <!--<ng-template ng-label-tmp let-item="item">
+                    {{ item.hsnCode }} - {{ item.description }}
+                  </ng-template>-->
+                </ng-select>
+                {{selectedItem}}
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" name="name" [ngClass]="!isSubmitClicked ? '': component.name.trim() === '' ? 'is-invalid': ''" [(ngModel)]="component.name" (change)="component.name = component.name.trim()" />
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="mb-3">
+                <label class="form-label">Category</label>
+                <select class="form-select" name="cat" [ngClass]="!isSubmitClicked ? '': component.categoryId === 0 ? 'is-invalid': ''" [(ngModel)]="component.categoryId">
+                  <option value="{{cat.id}}" *ngFor="let cat of categories">{{cat.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="mb-3">
+                <label class="form-label">Raw material</label>
+                <input type="text" class="form-control" name="rawmaterial" [ngClass]="!isSubmitClicked ? '': component.rawMaterial.trim() === '' ? 'is-invalid': ''" [(ngModel)]="component.rawMaterial" (change)="component.rawMaterial = component.rawMaterial.trim()" />
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="mb-3">
+                <label class="form-label">Unit Price</label>
+                <input type="number" class="form-control" name="unitprice" [ngClass]="!isSubmitClicked ? '': isNaN(component.unitPrice) || component.unitPrice === 0 || component.unitPrice.toString().trim() === '' ? 'is-invalid': ''" [(ngModel)]="component.unitPrice" (change)="component.unitPrice = +(component.unitPrice.toString().trim())" />
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="mb-3">
+                <label class="form-label">Sub-components count</label>
+                <input type="text" class="form-control" name="subcomponentcount" [ngClass]="!isSubmitClicked ? '': isNaN(component.subComponentCount) || component.subComponentCount.toString().trim() === '' ? 'is-invalid': ''" [(ngModel)]="component.subComponentCount" (change)="component.subComponentCount = +(component.subComponentCount.toString().trim())" />
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <h5 class="card-header ps-0">Manufacturing Process</h5>
+            </div>
+            <div class="col-lg-4" *ngFor="let procCost of component.componentManufacturingCosts; index as i">
+              <div class="mb-3">
+                <label class="form-label">{{getManufacturingProcessByID(procCost.manufacturingProcessId).name}}</label>
+                <input type="text" class="form-control" name="code{{i}}" [ngClass]="!isSubmitClicked ? '': isNaN(procCost.cost) || procCost.cost.toString().trim() === '' ? 'is-invalid': ''" [(ngModel)]="procCost.cost" (change)="procCost.cost = +(procCost.cost.toString().trim())" />
+              </div>
+            </div>
+          </div>
+          <div class="col-12 text-center">
+            <button type="button" class="btn btn-primary me-sm-3 me-1" (click)="save_click($event)"> Save </button>
+            <button type="button" class="btn btn-label-secondary" (click)="cancel_click($event)"> Cancel </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

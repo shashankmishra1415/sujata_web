@@ -1,0 +1,30 @@
+<div>
+  <div class="col-lg-4">
+    <div class="col-12">
+      <div class="pb-2">
+        <div class="head-label d-flex justify-content-between">
+          <div>
+            <h5 class="card-title mb-0">Employment Sub Category</h5>
+          </div>
+          <a class="btn btn-sm btn-outline-primary waves-effect" (click)="add_item_click()">
+            <span>
+              <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Add</span>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="card-datatable table-responsive pb-0 border-0">
+        <table class="table mb-0 table-borderless" id="pricing">
+          <tbody>
+            <tr *ngFor="let emp of EmploymentSubCategories; index as i">
+              <td><input type="text" class="form-control" [ngClass]="emp.name === '' ? 'is-invalid' : ''" [(ngModel)]="emp.name" (change)="item_changed(emp)"> </td>
+              <td>
+                <a title="Remove" role="button" (click)="item_remove_click(emp, i)"><i class="fa fa-close text-primary"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,77 @@
+<div id="sales-forecast" class="content">
+  <div class="content-header mb-3 d-flex justify-content-end">
+
+    <!-- <small><i class="ti ti-info-circle text-primary"></i> lorem ipsum</small> -->
+    <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#sales_forcast_modal"
+      (click)="btnEdit_click()"><i class="ti ti-edit me-0 me-sm-1 ti-xs"></i> Edit</a>
+  </div>
+
+  <div class="row g-4">
+
+    <div class="col-md-12">
+      <div class=" card-datatable table-responsive p-2">
+        <table class=" table no-bordered text-center headcount_category">
+          <colgroup>
+            <col class="table_yr">
+            <col class="table_gape">
+            <col class="table_year1">
+            <col class="table_gape">
+            <col class="table_year1">
+            <col class="table_gape">
+            <col class="table_year1">
+            <col class="table_gape">
+            <col class="table_year1">
+            <col class="table_gape">
+            <col class="table_year1">
+          </colgroup>
+          <thead class="">
+            <tr>
+              <th width="350px" class="category_name t-2">Details</th>
+              <ng-container *ngFor="let year of years;">
+                <th class="table_gape"></th>
+                <th class="t-2">
+                  Year {{year}}
+                </th>
+              </ng-container>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="fs-5 fw-bold">
+              <td class="category_name text-dark fs-6">Quantity</td>
+              <ng-container *ngFor="let year of years">
+                <td class="table_gape"></td>
+                <td>{{getQuantityByYear(year)}}</td>
+              </ng-container>
+            </tr>
+            <tr>
+              <td class="category_name">Increment %</td>
+              <ng-container *ngFor="let year of years">
+                <td class="table_gape"></td>
+                <td>{{getYearIncrementPercent(year)}}</td>
+              </ng-container>
+            </tr>
+            <tr *ngFor="let mrp of salesData.pricingInformations">
+              <td class="category_name">Sale value @ {{mrp.price | currency: 'INR'}}</td>
+              <ng-container *ngFor="let year of years">
+                <td class="table_gape"></td>
+                <td class="fs-5 text-primary">{{getSaleValue(year, mrp.price) | currency: 'INR'}}</td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row g-3 mt-3">
+    <div class="col-12 d-flex justify-content-between">
+      <button class="btn btn-label-secondary btn-prev" (click)="prev_click()">
+        <i class="ti ti-arrow-left me-sm-1"></i>
+        <span class="align-middle d-sm-inline-block d-none">Previous</span>
+      </button>
+      <button class="btn btn-primary btn-next" (click)="next_click()">
+        <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+        <i class="ti ti-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</div>

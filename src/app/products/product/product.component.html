@@ -1,0 +1,113 @@
+<div class="container-fluid flex-grow-1 container-p-y">
+  <div class="d-flex align-items-center justify-content-between">
+    <h4 class="mb-0"><a routerLink="/products"> Products</a> / {{id === 0 ? 'Add' : 'Edit'}} Product</h4>
+
+  </div>
+
+  <div class="bs-stepper wizard-icons wizard-modern wizard-modern-icons-example mt-2">
+    <div class="bs-stepper-header">
+
+      <div class="step" [ngClass]="[(currItem > 1) ? 'crossed' : '']" routerLink="production-capacity" [routerLinkActive]="'active'" (isActiveChange)="stepActivated($event, 1)">
+        <button type="button" class="step-trigger">
+          <span class="bs-stepper-icon">
+            <i class="ti ti-assembly fs-1"></i>
+          </span>
+          <span class="bs-stepper-label">Production Capacity</span>
+        </button>
+      </div>
+      <div class="line">
+        <i class="ti ti-chevron-right"></i>
+      </div>
+      <div class="step" [ngClass]="[(currItem > 2) ? 'crossed' : '',(id > 0) ? '' : 'noClick']" routerLink="head-count" [routerLinkActive]="'active'" (isActiveChange)="stepActivated($event, 2)">
+        <button type="button" class="step-trigger">
+          <span class="bs-stepper-icon">
+            <i class="ti ti-user-circle fs-1"></i>
+          </span>
+          <span class="bs-stepper-label">Headcount</span>
+        </button>
+      </div>
+      <div class="line">
+        <i class="ti ti-chevron-right"></i>
+      </div>
+      <div class="step" [ngClass]="[(currItem > 3) ? 'crossed' : '', (id > 0) ? '' : 'noClick']" routerLink="raw-material" [routerLinkActive]="'active'" (isActiveChange)="stepActivated($event, 3)">
+        <button type="button" class="step-trigger">
+          <span class="bs-stepper-icon">
+            <i class="ti ti-circles fs-1"></i>
+          </span>
+          <span class="bs-stepper-label">Raw Material</span>
+        </button>
+      </div>
+      <div class="line">
+        <i class="ti ti-chevron-right"></i>
+      </div>
+      <div class="step" [ngClass]="[(currItem > 4) ? 'crossed' : '', (id > 0) ? '' : 'noClick']" routerLink="assets" [routerLinkActive]="'active'" (isActiveChange)="stepActivated($event, 4)">
+        <button type="button" class="step-trigger">
+          <span class="bs-stepper-icon">
+            <i class="ti ti-asset fs-1"></i>
+          </span>
+          <span class="bs-stepper-label">Assets</span>
+        </button>
+      </div>
+
+      <div class="line">
+        <i class="ti ti-chevron-right"></i>
+      </div>
+      <div class="step" [ngClass]="[(currItem > 5) ? 'crossed' : '', (id > 0) ? '' : 'noClick']" routerLink="depreciation" [routerLinkActive]="'active'" (isActiveChange)="stepActivated($event, 5)">
+        <button type="button" class="step-trigger">
+          <span class="bs-stepper-icon">
+            <i class="ti ti-arrow-autofit-down fs-1"></i>
+          </span>
+
+          <span class="bs-stepper-label">Depreciation</span>
+        </button>
+      </div>
+      <div class="line">
+        <i class="ti ti-chevron-right"></i>
+      </div>
+      <div class="step" [ngClass]="[(currItem > 6) ? 'crossed' : '', (id > 0) ? '' : 'noClick']" routerLink="sales-forecast" [routerLinkActive]="'active'" (isActiveChange)="stepActivated($event, 6)">
+        <button type="button" class="step-trigger">
+          <span class="bs-stepper-icon">
+            <i class="ti ti-dots-circle-horizontal fs-1"></i>
+          </span>
+          <span class="bs-stepper-label">Sales Forecast</span>
+        </button>
+      </div>
+      <div class="line">
+        <i class="ti ti-chevron-right"></i>
+      </div>
+      <div class="step" [ngClass]="[(currItem > 7) ? 'crossed' : '', (id > 0) ? '' : 'noClick']" routerLink="pricing" [routerLinkActive]="'active'" (isActiveChange)="stepActivated($event, 7)">
+        <button type="button" class="step-trigger">
+          <span class="bs-stepper-icon">
+            <i class="ti ti-receipt fs-1"></i>
+          </span>
+          <span class="bs-stepper-label">Pricing</span>
+        </button>
+      </div>
+      <div class="line">
+        <i class="ti ti-chevron-right"></i>
+      </div>
+      <div class="step" [ngClass]="[(currItem > 8) ? 'crossed' : '', (id > 0) ? '' : 'noClick']" routerLink="balance-sheet" [routerLinkActive]="'active'" (isActiveChange)="stepActivated($event, 8)">
+        <button type="button" class="step-trigger">
+          <span class="bs-stepper-icon">
+            <i class="ti ti-git-compare fs-1"></i>
+          </span>
+          <span class="bs-stepper-label">Balance Sheet</span>
+        </button>
+      </div>
+      <div class="line">
+        <i class="ti ti-chevron-right"></i>
+      </div>
+      <div class="step" [ngClass]="[(currItem > 9) ? 'crossed' : '', (id > 0) ? '' : 'noClick']" routerLink="financial-summary" [routerLinkActive]="'active'" (isActiveChange)="stepActivated($event, 9)">
+        <button type="button" class="step-trigger">
+          <span class="bs-stepper-icon">
+            <i class="ti ti-file-invoice fs-1"></i>
+          </span>
+          <span class="bs-stepper-label">Financial Summary</span>
+        </button>
+      </div>
+    </div>
+    <div class="bs-stepper-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

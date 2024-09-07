@@ -1,0 +1,56 @@
+<div>
+  <div class="col-md-12">
+    <div class="pb-2">
+      <div class="head-label d-flex justify-content-between">
+        <div>
+          <h5 class="card-title mb-0">Wages & Salaries</h5>
+        </div>
+        <a role="button" class="btn btn-sm btn-outline-primary waves-effect" (click)="add_click()">
+          <span>
+            <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Add</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let wage of wagesAndSalaries">
+      <div class="card-datatable table-responsive p-2">
+        <table class=" table table-bordered rounded">
+          <thead class="">
+            <tr>
+              <td colspan="2" class="fw-bold">
+                State: <span class="text-primary">{{wage.stateName}}</span> | Effective Date: <span class="text-primary">{{wage.effectiveDate | date: "dd MMM yy"}}</span>
+                <span class="w-s-actions" style="float: right;">
+                  <a role="button" title="Edit" (click)="EditWage_Click(wage)"><i class="ti ti-edit me-1"></i></a>
+                  <a role="button" title="Delete" (click)="delete_click(wage)"><i class="ti ti-trash"></i></a>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th width="350px" class=" t-2">Category</th>
+              <th class="t-2">
+                Rates/month (₹)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+              <ng-container *ngFor="let category of getUniqueCategories(wage)">
+                  <tr class="fs-5 fw-bold">
+                      <td class=" text-dark fs-6" colspan="2">{{category.employmentCategoryName}}</td>
+                  </tr>
+                  <tr *ngFor="let subcat of getSubCategoriesByCatID(wage, category.employmentCategoryId)">
+                    <td class="">{{subcat.employmentSubCategoryName}}</td>
+                    <td>{{subcat.ratePerMonth | currency:'INR': 'symbol'}}</td>
+                  </tr> 
+              </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-12 pt-4">
+  <button type="Save" class="btn btn-primary me-sm-3 me-1 waves-effect waves-light">Save</button>
+  <button type="reset" class="btn btn-label-secondary waves-effect">Cancel</button>
+</div>

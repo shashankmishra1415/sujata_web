@@ -1,0 +1,85 @@
+<div class="card h-100">
+  <div class="card-header border-bottom">
+    <div class="head-label d-flex justify-content-between">
+      <div>
+        <h4 class="card-title mb-0">{{pricingMRP.mrp}}</h4>
+        <small class="text-muted">{{mrpTitle}}</small>
+      </div>
+      <div>
+        <a role="button" (click)="EditMRP_Click();"><i class="ti ti-edit"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="card-body p-3">
+    <p>Margin (%)</p>
+    <div class="d-flex justify-content-between px-3">
+      <div class="row">
+        <div class="col-12">
+          <label for=""><small class="text-light fw-medium">Primary</small></label><br>
+          <input type="range" (change)="onSliderChange()" class="sliders" width="100%" name="primary" min="0" max="100" step="1" [(ngModel)]="pricingMRP.primaryPercent" style="background: linear-gradient(to right, rgb(215, 86, 91) 0%, rgb(215, 86, 91) {{pricingMRP.primaryPercent}}%, rgb(228, 228, 228) {{pricingMRP.primaryPercent}}%, rgb(228, 228, 228) 100%) " />
+          <span id="Primary_Value" class="text-muted ms-2">{{pricingMRP.primaryPercent}}</span>
+        </div>
+        <div class="col-12">
+          <label for=""><small class="text-light fw-medium">Secondary</small></label><br>
+          <input type="range" (change)="onSliderChange()" class="sliders" width="100%" name="secondary" min="0" max="100" step="1" [(ngModel)]="pricingMRP.secondaryPercent" style="background: linear-gradient(to right, rgb(215, 86, 91) 0%, rgb(215, 86, 91) {{pricingMRP.secondaryPercent}}%, rgb(228, 228, 228) {{pricingMRP.secondaryPercent}}%, rgb(228, 228, 228) 100%) " />
+          <span id="Secondary_Value" class="text-muted ms-2">{{pricingMRP.secondaryPercent}}</span>
+        </div>
+        <div class="col-12">
+          <label for=""><small class="text-light fw-medium">Tertiary</small></label><br>
+          <input type="range" (change)="onSliderChange()" class="sliders" width="100%" name="tertiary" min="0" max="100" step="1" [(ngModel)]="pricingMRP.tertiaryPercent" style="background: linear-gradient(to right, rgb(215, 86, 91) 0%, rgb(215, 86, 91) {{pricingMRP.tertiaryPercent}}%, rgb(228, 228, 228) {{pricingMRP.tertiaryPercent}}%, rgb(228, 228, 228) 100%) " />
+          <span id="Tertiary_Value" class="text-muted ms-2">{{pricingMRP.tertiaryPercent}}</span>
+        </div>
+        <div class="col-12">
+          <label for=""><small class="text-light fw-medium">Manufacturer</small></label><br>
+          <input type="range" (change)="onSliderChange()" class="sliders" width="100%" name="manufacturer" min="0" max="100" step="1" [ngModel]="pricingMRP.manufacturerPercent" style="background: linear-gradient(to right, rgb(215, 86, 91) 0%, rgb(215, 86, 91) {{pricingMRP.manufacturerPercent}}%, rgb(228, 228, 228) {{pricingMRP.manufacturerPercent}}%, rgb(228, 228, 228) 100%)" disabled />
+          <span id="Manufacturer_Value" class="text-muted ms-2">{{pricingMRP.manufacturerPercent}}</span>
+        </div>
+      </div>
+      <div class="d-block">
+        <apx-chart [series]="chartOptionsRawMaterial.series1!" [chart]="chartOptionsRawMaterial.chart1!"
+                   [labels]="chartOptionsRawMaterial.labels!" [colors]="chartOptionsRawMaterial.colors!"
+                   [legend]="chartOptionsRawMaterial.legend!"></apx-chart>
+        <p style="text-align: right;">Total Margin: <span class="text-primary fs-5">{{getRetailerData.Margin + getDealerData.Margin + getDistributorData.Margin + getManufacturerData.Margin}}</span></p>
+      </div>
+    </div>
+
+
+    <div class=" card-datatable table-responsive mt-4">
+      <table class=" table no-bordered" id="MRP1-table">
+        <thead class="">
+          <tr>
+            <th>Party</th>
+            <th>Landing Price (₹)</th>
+            <th>Margin (₹)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Primary (Distributor)</td>
+            <td>{{getDistributorData.LandingPrice}}</td>
+            <td>{{getDistributorData.Margin}}</td>
+          </tr>
+          <tr>
+            <td>Secondary (Dealer)</td>
+            <td>{{getDealerData.LandingPrice}}</td>
+            <td>{{getDealerData.Margin}}</td>
+          </tr>
+          <tr>
+            <td>Tertiary (Retailer)</td>
+            <td>{{getRetailerData.LandingPrice}}</td>
+            <td>{{getRetailerData.Margin}}</td>
+          </tr>
+          <tr>
+            <td>Manufacturer</td>
+            <td>{{getManufacturerData.LandingPrice}}</td>
+            <td>{{getManufacturerData.Margin}}</td>
+          </tr>
+
+
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

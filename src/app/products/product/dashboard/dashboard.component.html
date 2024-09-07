@@ -1,0 +1,497 @@
+<div class="container-fluid flex-grow-1 container-p-y" #dashboardContainer>
+  <div class="d-flex align-items-center justify-content-between">
+    <h4 class="mb-0">Product Dashboard | <span class="text-primary">{{product === undefined ? '': product.name}}</span></h4>
+    <a class="btn btn-sm add-new btn-primary" type="button" (click)="downloadReport()">
+      <span>
+        <i class="ti ti-download me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">
+          Download
+          Report
+        </span>
+      </span>
+    </a>
+  </div>
+  <div class="row dashboard-cards mt-4">
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="d-flex align-items-end row">
+              <div class="col-7">
+                <div class="card-body py-3 text-nowrap">
+                  <h5 class="card-title mb-0">Production Capacity</h5>
+                  <small class="mb-2 text-muted">Pieces produced in a month</small>
+                  <h4 class="text-primary mb-2 mt-1">{{monthlyProductionCapacity}}</h4>
+                  <a role="button" routerLink="../production-capacity" class="btn btn-sm btn-primary">View Details</a>
+                </div>
+              </div>
+              <div class="col-5 text-center text-sm-left">
+                <div class="card-body">
+                  <img src="assets/img/factory.png" height="60" alt="view sales" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between pb-0">
+              <h5 class="mb-0 card-title">Raw Material Cost</h5>
+              <a role="button" routerLink="../raw-material"><i class="ti ti-circle-arrow-right-filled fs-4"></i></a>
+            </div>
+            <div class="card-body pt-0 pb-3">
+              <div class="d-flex align-items-center">
+                <h1 class="mb-0 me-2">{{RawMaterialCost | currency:'INR': 'symbol'}}</h1>
+              </div>
+              <p class="h5 mb-0">Components: <span class="text-primary"> {{ComponentsCount}}</span></p>
+
+              <!-- <div class="px-4 mx-5">
+                <canvas id="doughnutChart" class="chartjs mb-3" data-height="25"></canvas>
+              </div> -->
+
+              <div style="text-align:center">
+                <apx-chart [series]="chartOptionsRawMaterial.series1!" [chart]="chartOptionsRawMaterial.chart1!"
+                [labels]="chartOptionsRawMaterial.labels!" [colors]="chartOptionsRawMaterial.colors!"
+                [responsive]="chartOptionsRawMaterial.responsive!"
+                  ></apx-chart>
+              </div>
+
+              <div class="d-flex align-items-start mb-2">
+                <div class="badge rounded bg-label-primary p-2 me-3 rounded">
+                  <i class="ti ti-cash ti-sm"></i>
+                </div>
+                <div class="d-flex justify-content-between w-100 gap-2 align-items-center">
+                  <div class="me-2">
+                    <h6 class="mb-0">Outsourced</h6>
+                    <small class="text-muted">Count: {{OutSourcedComponentsCount}}</small>
+                  </div>
+                  <p class="mb-0 ">{{TotalOutSourcedCost | currency:'INR': 'symbol'}}</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-start">
+                <div class="badge rounded bg-label-secondary p-2 me-3 rounded">
+                  <i class="ti ti-coins ti-sm"></i>
+                </div>
+                <div class="d-flex justify-content-between w-100 gap-2 align-items-center">
+                  <div class="me-2">
+                    <h6 class="mb-0">In-house</h6>
+                    <small class="text-muted">Count: {{InHouseComponentsCount}}</small>
+                  </div>
+                  <p class="mb-0 ">{{TotalInHouseCost | currency:'INR': 'symbol'}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-lg-8">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="px-3 pt-3 d-flex justify-content-between">
+                  <h5 class="card-title mb-0">MRP <span class="text-primary">{{selectedMRP === undefined ? 0: selectedMRP.mrp | currency: 'INR'}} </span></h5>
+                  <a role="button" routerLink="../pricing"><i class="ti ti-circle-arrow-right-filled fs-4"></i></a>
+                </div>
+                <div class=" pb-0 p-3">
+                  <div class="d-flex justify-content-between">
+                    <small class="d-block mb-1 text-muted">Manufacturer Margin</small>
+                    <p class="card-text text-success">{{selectedMRP === undefined ? 0: selectedMRP.manufacturerPercent}}%</p>
+                  </div>
+                  <h4 class="card-title">{{pricingManufacturerMargin | currency: 'INR'}}</h4>
+                </div>
+                <div class="card-body pt-1 px-3">
+                  <div class="row">
+                    <div class="col-5">
+                      <div class="d-flex gap-2 align-items-center mb-2">
+                        <span class="badge bg-label-info p-1 rounded">
+                          <i class="ti ti-building-warehouse"></i>
+                        </span>
+                        <p class="mb-0">Retailer</p>
+                      </div>
+                      <h5 class="mb-0 pt-1 text-nowrap">{{selectedMRP === undefined ? 0: selectedMRP.tertiaryPercent}}%</h5>
+                      <small class="text-muted">{{pricingRetailerMargin | currency: 'INR'}}</small>
+                    </div>
+                    <div class="col-2">
+                      <div class="divider divider-vertical">
+                      </div>
+                    </div>
+                    <div class="col-5 text-end">
+                      <div class="d-flex gap-2 justify-content-end align-items-center mb-2">
+                        <p class="mb-0">Dealer</p>
+                        <span class="badge bg-label-danger p-1 rounded">
+                          <i class="ti ti-building-store"></i>
+                        </span>
+                      </div>
+                      <h5 class="mb-0 pt-1 text-nowrap ms-lg-n3 ms-xl-0">{{selectedMRP === undefined ? 0: selectedMRP.secondaryPercent}}%</h5>
+                      <small class="text-muted">{{pricingDealerMargin | currency: 'INR'}}</small>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-title mb-0">Image Gallery</h5>
+                </div>
+                <div class="card-body pb-2">
+
+                  <div class="swiper gallery" id="swiper-with-pagination">
+                    <div class="swiper-wrapper">
+                      <swiper-container slides-per-view="1" autoplay="true" css-mode="true" pagination="true" pagination-clickable="true">
+                        <swiper-slide style="text-align: center;"><img src="/assets/img/products/press_1.png" style="max-width: 100%; max-height: 100%;"></swiper-slide>
+                        <swiper-slide style="text-align: center;"><img src="/assets/img/products/press_2.png" style="max-width: 100%; max-height: 100%;"></swiper-slide>
+                        <swiper-slide style="text-align: center;"><img src="/assets/img/products/press_3.png" style="max-width: 100%; max-height: 100%;"></swiper-slide>
+                        <swiper-slide style="text-align: center;"><img src="/assets/img/products/press_4.png" style="max-width: 100%; max-height: 100%;"></swiper-slide>
+                        <swiper-slide style="text-align: center;"><img src="/assets/img/products/press_5.png" style="max-width: 100%; max-height: 100%;"></swiper-slide>
+                      </swiper-container>
+                      <div class="swiper-pagination"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+
+              <div class="card mt-4">
+                <div class="card-header">
+                  <div class="head-label d-flex justify-content-between">
+                    <div>
+                      <h5 class="card-title mb-0">Sales Volume Forecast</h5>
+                      <small class="text-muted">Product quantity projected to be sold across next 5 years</small>
+                    </div>
+                    <a role="button" routerLink="../sales-forecast"><i
+                        class="ti ti-circle-arrow-right-filled fs-4"></i></a>
+                  </div>
+                </div>
+                <!-- <div class="pb-0">
+                  <div class="col-lg-12">
+                    <canvas id="lineChart-sale" class="chartjs p-3" data-height="190"></canvas>
+                  </div>
+                </div> -->
+                <div  style="text-align:center">
+                  <apx-chart [series]="chartOptionsSalesVolumeForecast.series!" [chart]="chartOptionsSalesVolumeForecast.chart!"
+                    [xaxis]="chartOptionsSalesVolumeForecast.xaxis!" [stroke]="chartOptionsSalesVolumeForecast.stroke!"
+                    [colors]="chartOptionsSalesVolumeForecast.colors!" [dataLabels]="chartOptionsSalesVolumeForecast.dataLabels!"
+                    [legend]="chartOptionsSalesVolumeForecast.legend!" [markers]="chartOptionsSalesVolumeForecast.markers!"
+                    [grid]="chartOptionsSalesVolumeForecast.grid!" [yaxis]="chartOptionsSalesVolumeForecast.yaxis!"
+                    [title]="chartOptionsSalesVolumeForecast.title!"></apx-chart>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="head-label d-flex justify-content-between">
+                <div>
+                  <h5 class="card-title mb-0">Investments and Assets</h5>
+                  <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit</small>
+                </div>
+                <a role="button" routerLink="../assets"><i class="ti ti-circle-arrow-right-filled fs-4"></i></a>
+              </div>
+            </div>
+            <!-- <div class="pb-0">
+              <div class="col-lg-12 ">
+                <canvas id="lineChart-asset" class="chartjs p-3" data-height="220"></canvas>
+              </div>
+            </div> -->
+            <div  style="text-align:center">
+              <apx-chart [series]="chartOptionsAssets.series!" [chart]="chartOptionsAssets.chart!"
+                [xaxis]="chartOptionsAssets.xaxis!" [stroke]="chartOptionsAssets.stroke!"
+                [colors]="chartOptionsAssets.colors!" [dataLabels]="chartOptionsAssets.dataLabels!"
+                [legend]="chartOptionsAssets.legend!" [markers]="chartOptionsAssets.markers!"
+                [grid]="chartOptionsAssets.grid!" [yaxis]="chartOptionsAssets.yaxis!"
+                [title]="chartOptionsAssets.title!"></apx-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between">
+          <div class="card-title mb-0">
+            <h5 class="mb-0">Wages & salaries</h5>
+            <small class="text-muted">Totals for next 5 years</small>
+          </div>
+          <a role="button" routerLink="../head-count"><i class="ti ti-circle-arrow-right-filled fs-4"></i></a>
+        </div>
+        <div class="card-body pb-0 mt-2">
+          <ul class="list-unstyled mb-0">
+            <li class="mb-4" *ngFor="let wagesSalary of wagesSalaries">
+              <div class="d-flex align-items-start">
+                <div class="d-flex justify-content-between w-100 flex-wrap gap-2">
+                  <div class="me-2">
+                    <h6 class="mb-0">{{wagesSalary.amount | currency: 'INR'}}</h6>
+                    <small class="text-primary"><i class="ti ti-user ti-sm fs-6 "></i>
+                      {{wagesSalary.personCount}}</small>
+                  </div>
+
+                </div>
+                <div class="badge bg-label-secondary text-dark p-2 rounded">Year
+                  {{wagesSalary.year}}
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="card mt-4">
+        <div class="card-header d-flex justify-content-between">
+          <h5 class="card-title m-0 me-2">Yearly Profit</h5>
+          <a role="button" routerLink="../financial-summary"><i class="ti ti-circle-arrow-right-filled fs-4"></i></a>
+        </div>
+        <div class="card-body table-responsive mt-2">
+          <table class="table table-borderless" id="yearly_profit">
+            <thead class="border-bottom">
+              <tr>
+                <th>Year</th>
+                <th>Gross (₹)</th>
+                <th>Net (₹)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let year of years">
+                <td>
+                  <div class="badge bg-label-secondary text-dark p-2 px-3 my-3 rounded">{{year}}</div>
+                </td>
+                <td>
+                  <div class="d-flex flex-column">
+                    <p class="mb-0">{{getYPGrossProfitByYear(year)}}</p>
+
+                    <p class="fw-medium mb-0  gap-1 small" [ngClass]="getYPGrossProfitPercent(year) < 0 ? 'text-danger': 'text-success'" *ngIf="year !== 1">
+                      <i class="ti fs-5" [ngClass]="getYPGrossProfitPercent(year) < 0 ? 'ti-chevron-down': 'ti-chevron-up'"></i>
+                      {{getYPGrossProfitPercent(year)}}
+                    </p>
+                  </div>
+                </td>
+
+                <td>
+                  <div class="d-flex flex-column">
+                    <p class="mb-0">{{getYPNetProfitByYear(year)}}</p>
+
+                    <p class="fw-medium mb-0  gap-1 small" [ngClass]="getYPNetProfitPercent(year) < 0 ? 'text-danger': 'text-success'" *ngIf="year !== 1">
+                      <i class="ti fs-5" [ngClass]="getYPNetProfitPercent(year) < 0 ? 'ti-chevron-down': 'ti-chevron-up'"></i>
+                      {{getYPNetProfitPercent(year)}}
+                    </p>
+                  </div>
+                </td>
+              </tr>
+              <!-- <tr>
+                <td>
+
+                  <div class="badge bg-label-warning text-dark p-2 px-3 my-3 rounded">2</div>
+                </td>
+                <td>
+                  <div class="d-flex flex-column">
+                    <p class="mb-0">1,01,601</p>
+
+                    <p class="text-success fw-medium mb-0  gap-1 small">
+                      <i class="ti ti-chevron-up fs-5"></i>
+                      1%
+                    </p>
+                  </div>
+                </td>
+
+                <td>
+                  <div class="d-flex flex-column">
+                    <p class="mb-0">51,13,659</p>
+
+                    <p class="text-danger fw-medium mb-0  gap-1 small">
+                      <i class="ti ti-chevron-down fs-5"></i>
+                      5%
+                    </p>
+                  </div>
+                </td>
+              </tr> -->
+              <!-- <tr>
+                <td>
+                  <div class="badge bg-label-secondary text-dark p-2 px-3 my-3 rounded">3</div>
+                </td>
+                <td>
+                  <div class="d-flex flex-column">
+                    <p class="mb-0">1,10,837</p>
+
+                    <p class="text-success fw-medium mb-0  gap-1 small">
+                      <i class="ti ti-chevron-up fs-5"></i>
+                      1%
+                    </p>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex flex-column">
+                    <p class="mb-0">66,33,137</p>
+
+                    <p class="text-danger fw-medium mb-0  gap-1 small">
+                      <i class="ti ti-chevron-down fs-5"></i>
+                      5%
+                    </p>
+                  </div>
+                </td>
+              </tr> -->
+              <!-- <tr>
+                <td>
+                  <div class="badge bg-label-warning text-dark p-2 px-3 my-3 rounded">4</div>
+                </td>
+                <td>
+                  <div class="d-flex flex-column">
+                    <p class="mb-0">1,20,073</p>
+
+                    <p class="text-success fw-medium mb-0  gap-1 small">
+                      <i class="ti ti-chevron-up fs-5"></i>
+                      1%
+                    </p>
+                  </div>
+                </td>
+
+                <td>
+                  <div class="d-flex flex-column">
+                    <p class="mb-0">1,13,68,852</p>
+
+                    <p class="text-danger fw-medium mb-0  gap-1 small">
+                      <i class="ti ti-chevron-down fs-5"></i>
+                      6%
+                    </p>
+                  </div>
+                </td>
+              </tr> -->
+
+              <!-- <tr>
+                <td>
+                  <div class="badge bg-label-secondary text-dark p-2 px-3 my-3 rounded">5</div>
+                </td>
+                <td>
+                  <div class="d-flex flex-column">
+                    <p class="mb-0">1,27,463</p>
+
+                    <p class="text-success fw-medium mb-0  gap-1 small">
+                      <i class="ti ti-chevron-up fs-5"></i>
+                      1%
+                    </p>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex flex-column">
+                    <p class="mb-0">92,50,693</p>
+
+                    <p class="text-danger fw-medium mb-0  gap-1 small">
+                      <i class="ti ti-chevron-down fs-5"></i>
+                      7%
+                    </p>
+                  </div>
+                </td>
+              </tr> -->
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5 mt-4">
+      <div class="card">
+        <div class="card-header pb-0 d-flex justify-content-between mb-lg-n4">
+          <div class="card-title mb-0">
+            <h5 class="mb-0">Balance Sheet</h5>
+            <small class="text-muted">Current year at a glance</small>
+          </div>
+          <a role="button" routerLink="../balance-sheet"><i class="ti ti-circle-arrow-right-filled fs-4"></i></a>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 col-md-5 d-flex flex-column align-self-end mb-3">
+              <div class="d-flex gap-2 align-items-center mb-2 pb-1 flex-wrap">
+                <h1 class="mb-0">{{balanceSheetData === undefined ? 0 : balanceSheetData.netProfit[0] | currency: 'INR'}}</h1>
+                <!--<div class="badge rounded bg-label-success">+4.2%</div>-->
+              </div>
+              <small>Net Profit</small>
+            </div>
+            <div class="col-12 col-md-7">
+              <div style="text-align:center">
+                <apx-chart [series]="chartOptionsBalanceSheet.series!"
+                  [chart]="chartOptionsBalanceSheet.chart!"
+                  [xaxis]="chartOptionsBalanceSheet.xaxis!" 
+                  [dataLabels]="chartOptionsBalanceSheet.dataLabels!"
+                  [plotOptions]="chartOptionsBalanceSheet.plotOptions!"></apx-chart>
+              </div>
+            </div>
+            
+          </div>
+          <div class="border rounded p-3 mt-1">
+            <div class="row gap-4 gap-sm-0">
+              <div class="col-12 col-sm-4">
+                <div class="d-flex gap-2 align-items-center">
+                  <div class="badge rounded bg-label-primary p-1">
+                    <i class="ti ti-cash ti-sm"></i>
+                  </div>
+                  <h6 class="mb-0">Liabilities</h6>
+                </div>
+                <h4 class="my-2 pt-1">{{balanceSheetData === undefined ? 0 : balanceSheetData.liabilities.total[0] | currency: 'INR'}}</h4>
+                <div class="progress w-75" style="height: 4px">
+                  <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-4">
+                <div class="d-flex gap-2 align-items-center">
+                  <div class="badge rounded bg-label-info p-1"><i class="ti ti-asset ti-sm"></i></div>
+                  <h6 class="mb-0">Assets</h6>
+                </div>
+                <h4 class="my-2 pt-1">{{balanceSheetData === undefined ? 0 : balanceSheetData.assets.total[0] | currency: 'INR'}}</h4>
+                <div class="progress w-75" style="height: 4px">
+                  <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-4">
+                <div class="d-flex gap-2 align-items-center">
+                  <div class="badge rounded bg-label-danger p-1">
+                    <i class="ti ti-chart-histogram ti-sm"></i>
+                  </div>
+                  <h6 class="mb-0">Cash Profit</h6>
+                </div>
+                <h4 class="my-2 pt-1">{{balanceSheetData === undefined ? 0 : balanceSheetData.cashProfit[0] | currency: 'INR'}}</h4>
+                <div class="progress w-75" style="height: 4px">
+                  <div class="progress-bar bg-danger" role="progressbar" style="width: 65%" aria-valuenow="65"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-7">
+      <div class="card mt-4">
+        <div class="card-header">
+          <div class="head-label d-flex justify-content-between">
+            <div>
+              <h5 class="card-title mb-0">Depreciation</h5>
+              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit</small>
+            </div>
+            <a role="button" routerLink="../depreciation"><i class="ti ti-circle-arrow-right-filled fs-4"></i></a>
+          </div>
+        </div>
+        <div class="pb-3">
+          <!-- <div class="col-lg-12 mt-0">
+            <canvas id="lineChart-depreciation" class="chartjs p-3" data-height="275"></canvas>
+          </div> -->
+          <div style="text-align:center">
+            <apx-chart [series]="chartOptionsDepreciation.series!" [chart]="chartOptionsDepreciation.chart!"
+              [xaxis]="chartOptionsDepreciation.xaxis!" [stroke]="chartOptionsDepreciation.stroke!"
+              [colors]="chartOptionsDepreciation.colors!" [dataLabels]="chartOptionsDepreciation.dataLabels!"
+              [legend]="chartOptionsDepreciation.legend!" [markers]="chartOptionsDepreciation.markers!"
+              [grid]="chartOptionsDepreciation.grid!" [yaxis]="chartOptionsDepreciation.yaxis!"
+              [title]="chartOptionsDepreciation.title!"></apx-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="container-fluid flex-grow-1 container-p-y">
+  <div class="d-flex align-items-center justify-content-between">
+    <h4 class="mb-0 py-3">Configuration</h4>
+  </div>
+  <div class="row">
+    <div class="col-lg-2 col-sm-6 col-6">
+      <div class="card mb-2">
+        <a routerLink="lookups">
+          <div class="card-body text-center px-2">
+            <img src="assets/img/components/lookups.png" alt="Lookups ">
+            <div class="card-title mb-0 mt-3">
+              <h6 class="mb-0">Lookups Master</h6>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="col-lg-2 col-sm-6 col-6">
+      <div class="card mb-2">
+        <a role="button" routerLink="component-master">
+          <div class="card-body text-center px-2">
+            <img src="assets/img/components/components.png" alt="Components">
+            <div class="card-title mb-0 mt-3">
+              <h6 class="mb-0">Components Master</h6>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="col-lg-2 col-sm-6 col-6">
+      <div class="card mb-2">
+        <div class="card-body text-center px-2 pt-0">
+          <!-- <img src="assets/img/components/states-lookup.png" alt="Lookups"> -->
+          <div class="card-title mb-0 mt-3">
+            <h6 class="mb-3">Creditor days</h6>
+            <div class="d-flex px-4">
+              <input type="text" class="form-control me-2" [(ngModel)]="creditorDays" appNumericOnly [decimalPlaces]="0" [minValue]="0" />
+              <button type="button" class="btn btn-sm btn-primary" (click)="creditorDays_save_Click()"> Save </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-2 col-sm-6 col-6">
+      <div class="card mb-2">
+        <div class="card-body text-center px-2">
+          <img src="assets/img/components/upload.png" alt="Import HSN List">
+          <div class="card-title mb-0 mt-2">
+            <h6 class="mb-2">HSN List</h6>
+            <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal"
+                    aria-label="Close">
+              Import
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

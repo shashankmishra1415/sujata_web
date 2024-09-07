@@ -1,0 +1,117 @@
+<div id="raw-material-modern" class="content">
+  <div class="row g-4">
+    <div class="col-md-3">
+      <p>Material Cost: <span class="h4 text-primary">{{totalCost() | currency:'INR': 'symbol'}}</span></p>
+      <div class="row">
+        <p class="mb-1"><strong> By processing</strong></p>
+        <div class="col-lg-12 col-12 mb-4">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-5">
+                  <div class="d-flex gap-2 align-items-start mb-2">
+                    <span class="badge bg-label-warning p-1 rounded">
+                      <i class="ti ti-building-warehouse"></i>
+                    </span>
+                    <p class="mb-0">Outsourced</p>
+                  </div>
+                  <h3 class="mb-0 pt-1 text-nowrap">{{totalOutSourcedCost | currency:'INR': 'symbol'}}</h3>
+                  <small class="text-muted">Cost</small>
+                </div>
+                <div class="col-2">
+                  <div class="divider divider-vertical">
+                  </div>
+                </div>
+                <div class="col-5 text-end">
+                  <div class="d-flex gap-2 justify-content-end align-items-center mb-2">
+                    <p class="mb-0">In-house</p>
+                    <span class="badge bg-label-primary p-1 rounded">
+                      <i class="ti ti-building-store"></i>
+                    </span>
+                  </div>
+                  <h3 class="mb-0 pt-1 text-nowrap ms-lg-n3 ms-xl-0">{{totalInHouseCost | currency:'INR': 'symbol'}}</h3>
+                  <small class="text-muted">Cost</small>
+                </div>
+              </div>
+              <div class="d-flex align-items-center mt-3">
+                <div class="progress w-100" style="height: 4px">
+                  <div class="progress-bar bg-warning" style="width: {{outSourcePercent}}%"></div>
+                  <div class="progress-bar bg-primary" style="width: {{inHousePercent}}%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <p class="mb-1"><strong> By Category</strong></p>
+        <div class="col-lg-6 col-6 mb-4" *ngFor="let category of Categories">
+          <div class="card h-100">
+            <div class="card-body text-center p-3">
+              <div class="card-icon">
+                <img src="{{category.imagePath}}" alt="Metal" width="25px">
+              </div>
+              <h3 class="card-title mb-0 mt-2">{{totalCostByCategoryID(category.id) | currency:'INR': 'symbol'}}</h3>
+              <small>{{category.name}}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="">
+        <div class="card-header px-0">
+          <div class="d-flex justify-content-between">
+            <h5 class="card-title">Components</h5>
+            <div class="dropdown">
+              <button type="button" class=" btn btn-sm btn-primary me-2" (click)="addBtn_click()">
+                <span><i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>Add</span>
+              </button>
+              <button class="btn btn-sm btn-outline-primary py-2" type="button">
+                <i class="fa fa-close me-0 me-sm-1 fa-sm"></i> Remove
+              </button>
+
+            </div>
+          </div>
+
+        </div>
+        <div class="card dashboard-cards card-datatable table-responsive">
+          <table class="datatables-category-list table costing" id="costing">
+            <thead>
+              <tr>
+                <th><input type="checkbox" class="form-check-input main-checkbox"></th>
+                <th><strong>Name</strong></th>
+                <th><strong>Category</strong></th>
+                <th><strong>Outsourced</strong></th>
+                <th><strong>Quantity</strong></th>
+                <th><strong>Cost</strong></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let rawmaterialcomponent of RawMaterials">
+                <td><input type="checkbox" class="form-check-input sub-checkbox" /></td>
+                <td>{{rawmaterialcomponent.componentName}}</td>
+                <td><img src="{{GetCategoryByID(rawmaterialcomponent.categoryId).imagePath}}" alt="Electrical machine">{{GetCategoryByID(rawmaterialcomponent.categoryId).name}}</td>
+                <td><input type="checkbox" class="form-check-input" [(ngModel)]="rawmaterialcomponent.isOutSourced" (change)="updateData(rawmaterialcomponent)"></td>
+                <td><input type="text" class="form-control" [(ngModel)]="rawmaterialcomponent.quantity" (change)="updateData(rawmaterialcomponent)"></td>
+                <td>{{calculateComponentCostByQuantity(rawmaterialcomponent) | currency:'INR': 'symbol'}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-12 d-flex justify-content-between">
+      <button class="btn btn-label-secondary btn-prev" (click)="prev_click()">
+        <i class="ti ti-arrow-left me-sm-1"></i>
+        <span class="align-middle d-sm-inline-block d-none">Previous</span>
+      </button>
+      <button class="btn btn-primary btn-next" (click)="next_click()">
+        <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+        <i class="ti ti-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</div>

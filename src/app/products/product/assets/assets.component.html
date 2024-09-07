@@ -1,0 +1,64 @@
+<div id="assets-modern" class="content">
+  <div class="row g-4">
+    <div class="col-md-12">
+      <div class=" card-datatable table-responsive p-2">
+        <table class=" table no-bordered text-center headcount_category">
+          <colgroup>
+            <col class="table_yr">
+            <col class="table_gape">
+            <col class="table_year1">
+            <col class="table_gape">
+            <col class="table_year1">
+            <col class="table_gape">
+            <col class="table_year1">
+            <col class="table_gape">
+            <col class="table_year1">
+            <col class="table_gape">
+            <col class="table_year1">
+          </colgroup>
+          <thead class="">
+            <tr>
+              <th width="350px" class="category_name t-2">Assest heads</th>
+              <ng-container *ngFor="let year of years">
+                <th class="table_gape"></th>
+                <th class="t-2">
+                  YEAR {{year}}
+                  <h3 class="mb-0 text-primary">Rs. {{getTotalByYear(year)}}</h3>
+                </th>
+                <!--<th class="table_gape"></th>-->
+              </ng-container>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let assetType of assetsData.assetTypes; index as i">
+              <td class="category_name">{{assetType.name}}</td>
+              <ng-container *ngFor="let year of years; index as j">
+                <td class="table_gape"></td>
+                <td>
+                  <input
+                         type="text" name="asset{{i + '_' + j}}" class="form-control"
+                         [(ngModel)]="getAssetData(assetType.id, year).amount"
+                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(?!^-)-/g, '')" (change)="item_changed(assetType.id, year)"
+                  />
+                </td>
+                <!--<td class="table_gape"></td>-->
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-12 d-flex justify-content-between">
+      <button class="btn btn-label-secondary btn-prev" (click)="prev_click()">
+        <i class="ti ti-arrow-left me-sm-1"></i>
+        <span class="align-middle d-sm-inline-block d-none">Previous</span>
+      </button>
+      <button class="btn btn-primary btn-next" (click)="next_click()">
+        <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+        <i class="ti ti-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+
+
+</div>

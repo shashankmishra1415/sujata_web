@@ -1,0 +1,6 @@
+@import '../../../assets/vendor/libs/bs-stepper/bs-stepper.css';
+
+.noClick
+{
+    pointer-events: none;
+}

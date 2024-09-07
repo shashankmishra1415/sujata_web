@@ -1,0 +1,65 @@
+<div id="depreciation-modern" class="content">
+  <div class="row g-4">
+    <div class="col-md-12">
+      <div class=" card-datatable table-responsive p-2">
+        <table class="table no-bordered text-center headcount_category">
+          <!-- <colgroup>
+            <col class="table_yr">
+            <col class="table_gape">
+            <col class="table_year1">
+            <col class="table_gape">
+            <col class="table_year1">
+            <col class="table_gape">
+            <col class="table_year1">
+            <col class="table_gape">
+            <col class="table_year1">
+            <col class="table_gape">
+            <col class="table_year1">
+          </colgroup> -->
+          <thead class="">
+            <tr>
+              <th width="350px" class="category_name t-2">Depreciation</th>
+              <th class="table_gape"></th>
+              <ng-container *ngFor="let depreData of DepreciationData">
+                <th class="t-2">
+                  YEAR {{depreData.year}}
+                  <h3 class="mb-0 text-primary">₹ {{(depreData.amount * depreData.percent /100) }}</h3>
+                </th>
+                <th class="table_gape"></th>
+              </ng-container>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="">
+              <td class="category_name">Percent (%)</td>
+              <td class="table_gape"></td>
+              <ng-container *ngFor="let depreData of DepreciationData">
+                <td><input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(?!^-)-/g, '')"
+                    class="form-control" (change)="item_changed(depreData)" [(ngModel)]="depreData.percent"></td>
+                <td class="table_gape"></td>
+              </ng-container>
+            </tr>
+            <tr>
+              <td class="category_name">Written down values (₹)</td>
+              <td class="table_gape"></td>
+              <ng-container *ngFor="let depreData of DepreciationData">
+                <td>{{depreData.amount - (depreData.amount * depreData.percent /100)}}</td>
+                <td class="table_gape"></td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-12 d-flex justify-content-between">
+      <button class="btn btn-label-secondary btn-prev" (click)="prev_click()">
+        <i class="ti ti-arrow-left me-sm-1"></i>
+        <span class="align-middle d-sm-inline-block d-none">Previous</span>
+      </button>
+      <button class="btn btn-primary btn-next" (click)="next_click()">
+        <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+        <i class="ti ti-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</div>

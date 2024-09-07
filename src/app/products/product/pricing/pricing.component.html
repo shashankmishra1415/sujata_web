@@ -1,0 +1,101 @@
+<div id="pricing-modern" class="content pricing-modern">
+  <p class="mb-4">Product Cost: <span class="h4 text-primary">₹ 1,000</span></p>
+  <div class="row g-5">
+    <div class="col-md-4" style="min-height: 600px;">
+
+      <div class="card h-100 mrp2" *ngIf="pricingData === undefined || pricingData.pricing.mrp1 === null; else mrp1Box">
+        <div class="card-header border-bottom">
+          <div class="head-label d-flex justify-content-between py-4">
+            <div>
+              <h4 class="card-title mb-0"></h4>
+              <small class="text-muted"></small>
+            </div>
+          </div>
+        </div>
+        <div class="card_body p-3">
+          <div class="addition-data">
+            <a role="button" (click)="add_click('mrp1', 'MRP 1')">
+              <i class="ti ti-plus fs-1 "></i>
+            </a>
+            <p class="text-primary pt-2 text-center">Add MRP 1</p>
+          </div>
+
+
+        </div>
+      </div>
+      <ng-template #mrp1Box>
+        <app-pricing-box mrpTitle="MRP 1" [pricingMRP]="pricingData.pricing.mrp1" [productionCost]="pricingData.productCost" (ValuesChanged)="change('mrp1')"></app-pricing-box>
+      </ng-template>
+    </div>
+
+
+
+    <div class="col-md-4" style="min-height: 600px;">
+      <div class="card h-100 mrp2" *ngIf="pricingData === undefined || pricingData.pricing.mrp2 === null; else mrp2Box">
+        <div class="card-header border-bottom">
+          <div class="head-label d-flex justify-content-between py-4">
+            <div>
+              <h4 class="card-title mb-0"></h4>
+              <small class="text-muted"></small>
+            </div>
+          </div>
+        </div>
+        <div class="card_body p-3">
+          <div class="addition-data">
+            <a role="button" (click)="add_click('mrp2', 'MRP 2')">
+              <i class="ti ti-plus fs-1 "></i>
+            </a>
+            <p class="text-primary pt-2 text-center">Add MRP 2</p>
+          </div>
+
+
+        </div>
+      </div>
+      <ng-template #mrp2Box>
+        <app-pricing-box mrpTitle="MRP 2" [pricingMRP]="pricingData.pricing.mrp2" [productionCost]="pricingData.productCost" (ValuesChanged)="change('mrp2')"></app-pricing-box>
+      </ng-template>
+    </div>
+    <div class="col-md-4" style="min-height: 600px;">
+      <div class="card h-100 mrp3" *ngIf="pricingData === undefined || pricingData.pricing.mrp3 === null; else mrp3Box">
+        <div class="card-header border-bottom">
+          <div class="head-label d-flex justify-content-between py-4">
+            <div>
+              <h4 class="card-title mb-0"></h4>
+              <small class="text-muted"></small>
+            </div>
+          </div>
+        </div>
+        <div class="card_body p-3">
+          <div class="addition-data">
+            <a role="button" (click)="add_click('mrp3', 'MRP 3')">
+              <i class="ti ti-plus fs-1"></i>
+            </a>
+            <p class="text-primary pt-2 text-center">Add MRP 3</p>
+          </div>
+
+
+        </div>
+      </div>
+      <ng-template #mrp3Box>
+        <app-pricing-box mrpTitle="MRP 3" [pricingMRP]="pricingData.pricing.mrp3" [productionCost]="pricingData.productCost" (ValuesChanged)="change('mrp3')"></app-pricing-box>
+      </ng-template>
+    </div>
+
+    <!-- Multi  -->
+    <!--Product image Multi select -->
+
+
+
+  </div>
+
+  <div class="col-12 d-flex justify-content-between mt-3">
+    <button class="btn btn-label-secondary btn-prev" (click)="prev_click()">
+      <i class="ti ti-arrow-left me-sm-1"></i>
+      <span class="align-middle d-sm-inline-block d-none">Previous</span>
+    </button>
+    <button class="btn btn-primary btn-next" (click)="next_click()">
+      <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+      <i class="ti ti-arrow-right"></i>
+    </button>
+  </div>
+</div>

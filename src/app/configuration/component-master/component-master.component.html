@@ -1,0 +1,71 @@
+<div class="container-fluid flex-grow-1 container-p-y">
+  <div class="d-flex align-items-center justify-content-between">
+    <!-- <h4 class="mb-0">Manage Components</h4> -->
+    <h4 class="py-3 mb-0">
+      <span class="text-muted fw-light"><a role="button" routerLink="../">Configuration</a> /</span> Manage Components
+    </h4>
+    <div class="btn-group">
+      <button type="button" class="btn btn-sm btn-outline-primary waves-effect waves-light" (click)="btnAdd_click()">
+        <span><i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Add</span></span>
+      </button>
+      <button type="button" class="btn btn-sm btn-primary waves-effect waves-light" (click)="import_click($event)">
+        <i class="fa fa-upload me-1"></i><span class="d-none d-sm-inline-block">Import</span>
+      </button>
+    </div>
+  </div>
+  <div class="card mt-4">
+    <div class="card-header border-bottom">
+      <h5 class="card-title mb-3">Search Filter</h5>
+      <div class="row pb-2 gap-3 gap-md-0">
+        <div class="col-md-1">
+          <input type="text" class="form-control" placeholder="Code" [(ngModel)]="filter.code" />
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" placeholder="Name" [(ngModel)]="filter.name" />
+        </div>
+        <div class="col-md-2">
+          <select name="" id="" class="form-select" [(ngModel)]="filter.categoryId">
+            <option value="0">Select Category</option>
+            <option *ngFor="let category of Categories" value="{{category.id}}">{{category.name}}</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" placeholder="Raw Material" [(ngModel)]="filter.rawMaterial" />
+        </div>
+
+        <div class="col-md-2">
+          <button type="button" class="btn btn-outline-primary me-sm-3 me-1" (click)="filter_click()">Filter</button>
+          <button type="reset" class="btn btn-label-secondary" (click)="clear_click()">Clear</button>
+        </div>
+      </div>
+    </div>
+    <div class="card-datatable table-responsive">
+      <p-table [value]="Components" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[5, 10, 20]">
+        <ng-template pTemplate="header">
+          <tr>
+            <th><strong>Code</strong></th>
+            <th><strong>Name</strong></th>
+            <th><strong>Category</strong></th>
+            <th><strong>Raw Material</strong></th>
+            <th><strong>Unit Price</strong></th>
+            <th><strong>Action</strong></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+          <tr>
+            <td>{{row.code}}</td>
+            <td>{{row.name}}</td>
+            <td><img src="{{GetCategoryByID(row.categoryId).imagePath}}">{{GetCategoryByID(row.categoryId).name}}</td>
+            <td>{{row.rawMaterial}}</td>
+            <td>{{row.unitPrice}}</td>
+            <td>
+              <a role="button" title="Edit" (click)="editComponent_Click(row)"><i class="fa fa-pencil"></i></a>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+  </div>
+
+</div>
